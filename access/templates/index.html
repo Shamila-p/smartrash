@@ -1,0 +1,218 @@
+{% extends 'base_access.html'%}
+{% load static %}
+{% block content %}
+<div id="hero" class="d-flex align-items-center">
+    <div class="container position-relative" data-aos="fade-up" data-aos-delay="100">
+        <div class="container" id="home">
+            <div class="row justify-content-center">
+                <div class="card-container mx-auto mt-5">
+                    <div class="card card-front">
+                        <img class="card-img-top" src="{% static 'access/resources/img/man.png'%}" alt="Card image cap"
+                            style="height: 200px;width:200px;margin: auto;padding:10px;">
+                        <div class="card-body custom-card-body">
+                            <h5 class="card-title text-center"><b>CUSTOMER</b></h5>
+
+                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                        </div>
+                    </div>
+                    <div class="card card-back">
+                        <div class="card-body custom-card-body ">
+                            <a href="{% url 'customer_login' %}" class="btn btn-success">Click Here</a>
+                        </div>
+                    </div>
+                </div>
+                <div class="card-container mx-auto mt-5">
+                    <div class="card card-front">
+                        <img class="card-img-top" src="{% static 'access/resources/img/seatbelt.png'%}" alt="Card image cap"
+                            style="height: 200px;width:200px;margin: auto;padding:10px;">
+                        <div class="card-body custom-card-body">
+                            <h5 class="card-title text-center"><b>COLLECTION AGENT</b></h5>
+
+                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                        </div>
+                    </div>
+                    <div class="card card-back">
+                        <div class="card-body custom-card-body ">
+                            <a href="{% url 'agent_login' %}" class="btn btn-success ">Click Here</a>
+                        </div>
+                    </div>
+                </div>
+
+
+                <div class="card-container mx-auto mt-5 ">
+                    <div class="card card-front">
+                        <img class="card-img-top" src="{% static 'access/resources/img/businessman.png'%}" alt="Card image cap"
+                            style="height: 200px;width:200px;margin: auto;padding:10px;">
+                        <div class="card-body custom-card-body">
+                            <h5 class="card-title text-center"><b>MUNICIPALITY</b></h5>
+
+                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
+                        </div>
+                    </div>
+
+                    <div class="card card-back">
+                        <div class="card-body custom-card-body ">
+                            <a href="{% url 'municipality_login' %}" class="btn btn-success ">Click Here</a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<!-- ======= About Section ======= -->
+
+<section id="about" class="about">
+    <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+            <h2>About Us</h2>
+            <p>Magnam dolores commodi suscipit. Necessitatibus eius consequatur ex aliquid fuga eum quidem. </p>
+        </div>
+
+        <div class="row content">
+            <div class="col-lg-6">
+                <p>
+                    Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                    labore et dolore
+                    magna aliqua.Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor
+                    incididunt ut labore et dolore
+                    magna aliqua.
+                    magna aliqua.
+                </p>
+
+            </div>
+            <div class="col-lg-6 pt-4 pt-lg-0">
+                <p>
+                    Ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in
+                    reprehenderit in voluptate
+                    velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
+                    proident, sunt in
+                    culpa qui officia deserunt mollit anim id est laborum.
+                </p>
+
+            </div>
+        </div>
+
+    </div>
+    <!-- End About Section -->
+
+    <!-- ======= Quotes Section ======= -->
+    <section id="testimonials" class="testimonials">
+        <div class="container" data-aos="fade-up">
+
+
+
+            <div class="testimonials-slider swiper" data-aos="fade-up" data-aos-delay="100">
+                <div class="swiper-wrapper">
+
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <p>
+                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                Proin iaculis purus consequat sem cure digni ssim donec porttitora entum
+                                suscipit rhoncus. Accusantium quam, ultricies eget id, aliquam eget nibh et.
+                                Maecen aliquam, risus at semper.
+                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+
+                        </div>
+                    </div>
+                    <!-- End Quotes item -->
+
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <p>
+                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                Fugiat enim eram quae cillum dolore dolor amet nulla culpa multos export minim
+                                fugiat minim velit minim dolor enim duis veniam ipsum anim magna sunt elit fore
+                                quem dolore labore illum veniam.
+                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+
+                        </div>
+                    </div><!-- End testimonial item -->
+
+                    <div class="swiper-slide">
+                        <div class="testimonial-item">
+                            <p>
+                                <i class="bx bxs-quote-alt-left quote-icon-left"></i>
+                                Quis quorum aliqua sint quem legam fore sunt eram irure aliqua veniam tempor
+                                noster veniam enim culpa labore duis sunt culpa nulla illum cillum fugiat legam
+                                esse veniam culpa fore nisi cillum quid.
+                                <i class="bx bxs-quote-alt-right quote-icon-right"></i>
+                            </p>
+
+                        </div>
+                    </div><!-- End testimonial item -->
+
+                </div>
+                <div class="swiper-pagination"></div>
+            </div>
+
+        </div>
+    </section><!-- End Testimonials Section -->
+</section>
+
+
+
+
+
+
+
+
+
+
+<!-- ======= Contact Section ======= -->
+<div class="outer" id="footer" style="background-color: #f0f8f8;">
+    <div class="container">
+        <div class="container">
+            <h1 class="font-weight-light text-center py-3">Contact Us</h1>
+            <div class="row">
+                <div class="col-lg-6 col-md-12 col-sm-12 col-12">
+                    <div class="row pt-3">
+                        <div class="col-lg-1 offset-1 col-md-2 col-sm-2 col-2">
+                            <span style="font-size: 30px;color: rgb(236, 68, 68);"><i
+                                    class="fa-solid fa-location-dot"></i></span>
+                        </div>
+                        <div class="col-lg-10 col-md-9 col-sm-9 col-9">
+                            <h3 class="font-weight-light">Find Us</h3>
+                            <p>loremloremlorem,<br>loremipsumm,<br>romania</p>
+                        </div>
+                    </div>
+                    <div class="row pt-3">
+                        <div class="col-lg-1 offset-1 col-md-2 col-sm-2 col-2">
+                            <span style="font-size: 30px;color: rgb(38, 82, 230);"><i
+                                    class="fa-solid fa-phone"></i></span>
+                        </div>
+                        <div class="col-lg-10 col-md-9 col-sm-9 col-9">
+                            <h3 class="font-weight-light">Give Us A Ring</h3>
+                            <p>Smarttrash<br>9685243718,</p>
+                        </div>
+                    </div>
+                </div>
+                <div class="col-lg-6 ">
+                    <form action="">
+                        <div class="form-row">
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12 col-12">
+                                <label>First Name</label>
+                                <input type="text" class="form-control" placeholder="First Name">
+
+                            </div>
+                            <div class="form-group col-lg-6 col-md-12 col-sm-12 col-12">
+                                <label>Last Name</label>
+                                <input type="text" class="form-control" placeholder="Last Name">
+                            </div>
+                        </div>
+                        <label>Email</label>
+                        <input type="Email" placeholder="Email" class="form-control">
+                        <label>Your Message</label>
+                        <textarea class="form-control mb-3" placeholder="Message" id="" cols="10" rows="5"></textarea>
+                        <button class="btn btn-primary float-right">Send Message</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}

@@ -38,7 +38,11 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'home.apps.HomeConfig',
+    'accounts.apps.AccountsConfig',
+    'access.apps.AccessConfig',
 ]
+AUTH_USER_MODEL = 'accounts.User'
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -55,7 +59,7 @@ ROOT_URLCONF = 'smartrash.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'landing/templates')],
+        'DIRS': [os.path.join(BASE_DIR,'access/templates'),os.path.join(BASE_DIR,'home/templates'),os.path.join(BASE_DIR, 'templates')],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -76,9 +80,12 @@ WSGI_APPLICATION = 'smartrash.wsgi.application'
 
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
+        'ENGINE': 'django.db.backends.mysql',
+        'NAME': 'smartrash',
+        'USER': 'root',
+        'PASSWORD': '12345678',
+        'HOST': '127.0.0.1'
+}
 }
 
 
@@ -121,6 +128,8 @@ STATICFILES_DIRS =[
     os.path.join(BASE_DIR, 'static')
 ]
 STATIC_ROOT= os.path.join(BASE_DIR,'asset')
+MEDIA_URL='/media/'
+MEDIA_ROOT= os.path.join(BASE_DIR,'media')
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/4.0/ref/settings/#default-auto-field
