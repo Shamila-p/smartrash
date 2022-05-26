@@ -1,8 +1,7 @@
-from django.shortcuts import redirect, render
+from django.shortcuts import  render
+from django.contrib.auth.decorators import login_required
 
+@login_required
 def home(request):
     if request.method == 'GET':
-        if not request.user.is_authenticated:
-            return redirect('index')
-        else:
-            return render(request, 'home.html')
+        return render(request, 'home.html')

@@ -18,6 +18,8 @@ def customer(request):
 
 def customer_login(request):
     if request.method == 'GET':
+        if request.user.is_authenticated and request.user.role == User.CUSTOMER:
+            return redirect('home')
         context = {'title': 'Customer Login',
                    'signup_url_name': 'customer_signup', 'show_forgot_password': True}
         return render(request, 'login.html', context)
@@ -42,6 +44,8 @@ def agent(request):
 
 def agent_login(request):
     if request.method == 'GET':
+        if request.user.is_authenticated and request.user.role == User.COLLECTION_AGENT:
+            return redirect('home')
         context = {'title': 'Agent Login',
                    'signup_url_name': 'agent_signup', 'show_forgot_password': True}
         return render(request, 'login.html', context)
@@ -66,6 +70,8 @@ def municipality(request):
 
 def municipality_login(request):
     if request.method == 'GET':
+        if request.user.is_authenticated and request.user.role == User.MUNICIPALITY:
+            return redirect('home')
         context = {'title': 'Municipality Login',
                    'signup_url_name': None, 'show_forgot_password': True}
         return render(request, 'login.html', context)
