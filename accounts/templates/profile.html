@@ -1,0 +1,168 @@
+{% extends 'base.html'%}
+{% block content %}
+
+<div class="container ">
+    <div class="row">
+        <div class="col-md-4 ml-5 mt-5">
+            {% if request.user.role == 'CU' or request.user.role == 'CA' %}
+            <img src="{{user.profile_image_url}}" class="profile_img" alt=""
+                style="height:200px;width:200px;border:1px;border-radius:100%">
+            {%endif%}
+        </div>
+        <div class="col-md-8">
+            {% if request.user.role == 'CU' or request.user.role == 'CA' %}
+                First Name:<label class="labels">{{request.user.first_name}}</label><br>
+                Last Name:<label class="labels">{{request.user.last_name}}</label><br>
+                Phone Number:<label class="labels">{{request.user.phone}}</label><br>
+                Email:<label class="labels">{{request.user.email}}</label><br>
+                House Name:<label class="labels">{{request.user.housename}}</label><br>
+                Municipality:<label class="labels">{{request.user.municipality.first_name}}</label><br>
+                Post Code:<label class="labels">{{request.user.postcode}}</label><br>
+                State:<label class="labels">{{request.user.state}}</label><br>
+                Country:<label class="labels">{{request.user.country}}</label><br>
+            {% elif request.user.role == 'MU' %}
+                Name:<label class="labels">{{request.user.first_name}}</label><br>
+                Phone Number:<label class="labels">{{request.user.phone}}</label><br>
+                Email:<label class="labels">{{request.user.email}}</label><br>
+                Post Code:<label class="labels">{{request.user.postcode}}</label><br>
+                State:<label class="labels">{{request.user.state}}</label><br>
+                Country:<label class="labels">{{request.user.country}}</label><br>
+            {%endif%}
+            {% if request.user.role == 'CA' %}
+            Aadhaar Number:<label class="labels">{{collection_agent.aadhaar_number}}</label><br>
+            <div class="col-md-4 ml-5 mt-5">
+                <img src="{{collection_agent.aadhaar_image_url}}" class="aadhaar_pic" alt=""
+                    style="height:200px;width:200px;border:1px;border-radius:100%">
+            </div>
+            License Number:<label class="labels">{{collection_agent.license_number}}</label><br>
+            <div class="col-md-4 ml-5 mt-5">
+                <img src="{{collection_agent.license_image_url}}" class="license_pic" alt=""
+                    style="height:200px;width:200px;border:1px;border-radius:100%">
+            </div>
+            {%endif%}
+        </div>
+    </div>
+    <div class="row">
+        <form method="post" enctype="multipart/form-data" action="{% url 'profile_edit' %}">
+            {%csrf_token%}
+            <div class="row mt-2">
+            {% if request.user.role == 'CU' or request.user.role == 'CA' %}
+
+                <div class="col-md-6 form-group"><label class="labels">First Name</label><input type="text"
+                        class="form-control" placeholder="enter First name" name="first_name" required
+                        value="{{request.user.first_name}}"></div>
+                <div class="col-md-6 form-group"><label class="labels">Last name</label><input type="text"
+                        class="form-control" placeholder=" enter Last name" name="last_name" required
+                        value="{{request.user.last_name}}"></div>
+            {%elif request.user.role == 'MU' %}
+            <div class="col-md-12 form-group"><label class="labels">Name</label><input type="text"
+                class="form-control" placeholder="enter name" name="first_name" required
+                value="{{request.user.first_name}}"></div>
+            {%endif%}
+            </div>
+            <div class="row ">
+                <div class="col-md-6 mt-3">
+                    <label class="labels">Phone Number</label>
+                    <input type="text" class="form-control" placeholder="Enter phone number" name="phone" required
+                        value="{{request.user.phone}}">
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label class="labels">Email ID</label>
+                    <input type="text" class="form-control" placeholder="Enter email id" name="email" required
+                        value="{{request.user.email}}">
+                </div>
+                {%  if request.user.role == 'CA' %}
+                <div class="col-md-6 mt-3">
+                    <label class="labels">Aadhaar Number</label>
+                    <input type="text" class="form-control" placeholder="Enter aadhaar number" name="aadhaar" required
+                        value="{{collection_agent.aadhaar_number}}">
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label class="labels">Upload Aadhar card</label>
+                    <input type="file" class="form-control" accept="image/*" name="aadhaar_pic" >
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label class="labels">License Number</label>
+                    <input type="text" class="form-control" placeholder="Enter License number" name="license"
+                     required value="{{collection_agent.license_number}}">
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label class="labels">Upload License</label>
+                    <input type="file" class="form-control" accept="image/*" name="license_pic" >
+                </div>
+                {%endif%}
+                {% if request.user.role == 'CU' or request.user.role == 'CA' %}
+
+                <div class="col-md-12 mt-3">
+                    
+                    <label class="labels">House Name</label>
+                    <input class="form-control" placeholder="Enter house name " name="house_name" required
+                        value="{{request.user.housename}}">
+                </div>
+                <div class="col-md-4 mt-3">
+                    <label class="labels">Place</label>
+                    <input type="text" class="form-control" placeholder="Enter your area" name="place" required
+                        value="{{request.user.place}}">
+                </div>
+                <div class="col-md-4 mt-3">
+                    <label class="labels">Municipality</label>
+                    <select name="municipality" id="municipality" class="form-control">
+                        {%for municipality in municipalities%}
+                        <option value="{{municipality.id}}" {%if user.municipality.id == municipality.id %} selected
+                            {%endif%}>{{municipality.first_name}}</option>
+                        {%endfor%}
+                    </select>
+                </div>
+                {%endif%}
+                <div class="col-md-4 mt-3">
+                    <label class="labels">Postcode</label>
+                    <input type="text" class="form-control" placeholder="Enter postcode" required name="postcode"
+                        value="{{request.user.postcode}}">
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label class="labels">State</label>
+                    <input type="text" class="form-control" placeholder="State" name="state"
+                        value="{{request.user.state}}">
+                </div>
+                <div class="col-md-6 mt-3">
+                    <label class="labels">Country</label>
+                    <input type="text" class="form-control" placeholder="Country" name="country"
+                        value="{{request.user.country}}">
+                </div>
+                {% if request.user.role == 'CU' or request.user.role == 'CA' %}
+
+                <div class="col-md-6 mt-3">
+                    <label class="labels">Upload Profile image</label>
+                    <input type="file" class="form-control" accept="image/*" name="profile_image" id="profile_image">
+                </div>
+                {%endif%}
+            </div>
+            <div class="mt-5 text-center">
+                <button class="btn btn-primary profile-button" type="submit">UPDATE</button>
+            </div>
+        </form>
+    </div>
+    <div class="row">
+        <h2>Change Password</h2>
+        <br>
+        <form action="{% url 'change_password'%}" method="post">
+            {%csrf_token%}
+            <div class="form-group">
+                <label for="newpassword">Current Password</label>
+                <input type="password" class="form-control" id="newpassword" name="currentpoassword">
+            </div>
+            <div class="form-group">
+                <label for="newpassword">New Password</label>
+                <input type="password" class="form-control" id="newpassword" name="newpassword">
+            </div>
+            <div class="form-group">
+                <label for="confirm password">Confirm Password</label>
+                <input type="password" class="form-control" id="confirmpassword" name="confirmpassword">
+            </div>
+            <div class="mt-5 text-center">
+                <button type="submit" class="btn btn-primary profile-button">SUBMIT</button>
+            </div>
+        </form>
+    </div>
+</div>
+{%endblock%}

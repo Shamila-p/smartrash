@@ -27,6 +27,15 @@ class User(AbstractUser):
     role = models.CharField(
         max_length=2, choices=ROLES_CHOICES, null=False, default=ADMIN)
 
+    @property
+    def profile_image_url(self):
+        try:
+            url=self.profile_image.url
+        except ValueError:
+            url=""
+        return url
+
+
 
 class CollectionAgent(models.Model):
     aadhaar_number = models.CharField(max_length=12)
@@ -34,3 +43,19 @@ class CollectionAgent(models.Model):
     aadhaar_image = models.ImageField(upload_to='aadhaar_image')
     license_image = models.ImageField(upload_to='license_image')
     user = models.ForeignKey(User, on_delete=models.CASCADE)
+
+    @property
+    def aadhaar_image_url(self):
+        try:
+            url=self.aadhaar_image.url
+        except ValueError:
+            url=""
+        return url
+
+    @property
+    def license_image_url(self):
+        try:
+            url=self.license_image.url
+        except ValueError:
+            url=""
+        return url
