@@ -12,6 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
+import credentials
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -21,7 +22,7 @@ BASE_DIR = Path(__file__).resolve().parent.parent
 # See https://docs.djangoproject.com/en/4.0/howto/deployment/checklist/
 
 # SECURITY WARNING: keep the secret key used in production secret!
-SECRET_KEY = 'django-insecure-w(+t3^k=ey3$f^2jheow*ul10#v&6dn(ocla$tz&m8j)l&z_@0'
+SECRET_KEY = credentials.SECRET_KEY
 
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
@@ -82,9 +83,9 @@ DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.mysql',
         'NAME': 'smartrash',
-        'USER': 'root',
-        'PASSWORD': '12345678',
-        'HOST': '127.0.0.1'
+        'USER': credentials.DATABASE_USERNAME,
+        'PASSWORD': credentials.DATABASE_PASSWORD,
+        'HOST': '12345678',
 }
 }
 
