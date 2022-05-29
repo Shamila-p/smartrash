@@ -12,7 +12,7 @@ https://docs.djangoproject.com/en/4.0/ref/settings/
 
 import os
 from pathlib import Path
-import credentials
+from smartrash import credentials
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -42,6 +42,8 @@ INSTALLED_APPS = [
     'home.apps.HomeConfig',
     'accounts.apps.AccountsConfig',
     'access.apps.AccessConfig',
+    'wallet.apps.WalletConfig',
+    'query.apps.QueryConfig',
 ]
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -60,7 +62,14 @@ ROOT_URLCONF = 'smartrash.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [os.path.join(BASE_DIR,'access/templates'),os.path.join(BASE_DIR,'home/templates'),os.path.join(BASE_DIR, 'templates'),os.path.join(BASE_DIR,'accounts/templates')],
+        'DIRS': [
+            os.path.join(BASE_DIR, 'access/templates'),
+            os.path.join(BASE_DIR, 'home/templates'),
+            os.path.join(BASE_DIR, 'templates'),
+            os.path.join(BASE_DIR, 'accounts/templates'),
+            os.path.join(BASE_DIR, 'wallet/templates'),
+            os.path.join(BASE_DIR, 'query/templates'),
+        ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
@@ -85,8 +94,8 @@ DATABASES = {
         'NAME': 'smartrash',
         'USER': credentials.DATABASE_USERNAME,
         'PASSWORD': credentials.DATABASE_PASSWORD,
-        'HOST': '12345678',
-}
+        'HOST': '127.0.0.1',
+    }
 }
 
 
@@ -125,13 +134,13 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/4.0/howto/static-files/
 
 STATIC_URL = 'static/'
-STATICFILES_DIRS =[
+STATICFILES_DIRS = [
     os.path.join(BASE_DIR, 'static')
 ]
-STATIC_ROOT= os.path.join(BASE_DIR,'asset')
+STATIC_ROOT = os.path.join(BASE_DIR, 'asset')
 
-MEDIA_URL='/media/'
-MEDIA_ROOT= os.path.join(BASE_DIR,'media')
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 LOGIN_REDIRECT_URL = 'home'
 LOGIN_URL = 'index'
