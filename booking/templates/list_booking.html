@@ -24,7 +24,7 @@
                         <tbody>
                             {%for booking in bookings%}
                             <tr>
-                                <td>{{booking.smartbin.user.first_name}}</td>
+                                <td>{{booking.smartbin.user.first_name}} {{booking.smartbin.user.last_name}} </td>
                                 <td>{{booking.smartbin.user.housename}} <br>
                                     {{booking.smartbin.user.place}} <br>
                                     {{booking.smartbin.user.postcode}} <br>
@@ -37,7 +37,7 @@
                                     {% if booking.collection_agent == None %}
                                     <span class="text-danger">Unassigned</span>
                                     {%else%}
-                                    {{booking.collection_agent.first_name}}
+                                    {{booking.collection_agent.first_name}} {{booking.collection_agent.last_name}}
                                     {%endif%}
                                 </td>
                                 {%endif%}

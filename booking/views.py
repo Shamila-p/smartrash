@@ -14,7 +14,7 @@ def booking_create(request):
         bin_id = request.POST['bin_id']
         if SmartBin.objects.filter(bin_id=bin_id).exists():
             smartbin = SmartBin.objects.get(bin_id=bin_id)
-            if not Booking.objects.filter(smartbin_id=smartbin.id).exclude(status=Booking.COLLECTED).exists():
+            if not Booking.objects.filter(smartbin_id=smartbin.id).exclude(status=Booking.VERIFIED).exists():
                 Booking.objects.create(
                     smartbin_id=smartbin.id, status=Booking.PENDING)
                 smartbin.fill_status = True
@@ -37,11 +37,11 @@ def list_booking(request):
     if request.method == 'GET':
         if request.user.role == User.MUNICIPALITY:
             bookings = Booking.objects.filter(
-                smartbin__user__municipality_id=request.user.id)
+                smartbin__user__municipality_id=request.user.id).exclude(status=Booking.VERIFIED)
             context = {'title': 'Tasks', 'bookings': bookings}
         if request.user.role == User.COLLECTION_AGENT:
             bookings = Booking.objects.filter(
-                collection_agent_id=request.user.id)
+                collection_agent_id=request.user.id).exclude(status=Booking.VERIFIED)
             context = {'title': 'List Tasks',
                        'bookings': bookings, 'add_button_name': 'COLLECT', 'add_button_url_name': 'collect'}
         return render(request, 'list_booking.html', context)

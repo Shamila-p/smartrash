@@ -34,7 +34,7 @@
         <div class="form-group col-md-6">
             <select class="form-control form-control-lg " name="collection_agent" required>
                 {% for agent in agents%}
-                <option value="{{agent.id}}">{{agent.first_name}}</option>
+                <option value="{{agent.id}}">{{agent.first_name}} {{agent.last_name}}</option>
                 {%endfor%}
             </select>
         </div>

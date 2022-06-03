@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from accounts.models import CollectionAgent, User
+from home.models import WasteAmount
 from smartbin.models import SmartBin
 from django.contrib import messages
 
@@ -285,11 +286,12 @@ def add_municipalities(request):
         elif User.objects.filter(phone=phone).exists():
             messages.info(request, 'phone number already registered')
         else:
-            user=User.objects.create_user(first_name=first_name, username=email,
+            municipality=User.objects.create_user(first_name=first_name, username=email,
                                      email=email, phone=phone,
                                      postcode=postcode, state=state,
                                      country=country, password=password1, role=User.MUNICIPALITY)
-            Wallet.objects.create(amount=0,user_id=user.id)
+            WasteAmount.objects.create(municipality_id=municipality.id)
+            Wallet.objects.create(amount=0,user_id=municipality.id)
             return redirect('list_municipalities')
         return redirect('add_municipalities')
 

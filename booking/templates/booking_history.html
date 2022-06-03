@@ -5,7 +5,7 @@
         <div class="card">
             <div class="card-body">
                 <div class="table-responsive">
-                    <table class="table table-striped" id="list_booking">
+                    <table class="table table-striped" id="history">
                         <thead>
                             <tr>
                                 {%if request.user.role == 'MU' or request.user.role == 'CA'%}
@@ -25,7 +25,7 @@
                             {%for booking in bookings%}
                             <tr>
                                 {%if request.user.role == 'MU' or request.user.role == 'CA'%}
-                                <td>{{booking.smartbin.user.first_name}}</td>
+                                <td>{{booking.smartbin.user.first_name}} {{booking.smartbin.user.last_name}}</td>
                                 <td>{{booking.smartbin.user.housename}} <br>
                                     {{booking.smartbin.user.place}} <br>
                                     {{booking.smartbin.user.postcode}} <br>
@@ -40,7 +40,7 @@
                                     {% if booking.collection_agent == None %}
                                     <span class="text-danger">Unassigned</span>
                                     {%else%}
-                                    {{booking.collection_agent.first_name}}
+                                    {{booking.collection_agent.first_name}} {{booking.collection_agent.last_name}}
                                     {%endif%}
                                 </td>
                                 {%endif%}
@@ -65,7 +65,7 @@
 {%block script%}
 <script>
     $(function () {
-        $("#list_booking").dataTable();
+        $("#history").dataTable();
     })
 </script>
 {%endblock%}

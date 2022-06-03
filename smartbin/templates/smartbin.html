@@ -1,5 +1,10 @@
 {% extends 'base.html'%}
 {% block content %}
+{%for message in messages%}
+    <div class="alert alert-danger">
+        <span> {{message}}</span>
+    </div>
+    {%endfor%}
 {% if smartbin.bin_id == None %}
 <h4>Smart Bin not linked yet!! </h4>
 <a href="{%url 'link_bin' %}" class="btn btn-primary">LINK NOW</a>
@@ -12,14 +17,15 @@
       {%if smartbin.fill_status == True %}
       <h3 class="text-danger display-3">Your Bin is full</h3>
       <h5 class="card-title mt-3">Booking Status:{{booking.status}}</h5><br>
-      <h3 class="card-title mt-3 display-2">Collection Date:
+      <h5 class="card-title mt-3 display-2">Collection Date:
         {%if booking.collection_date == None %}
         not updated
         {%else%} 
         {{booking.collection_date}}
         {%endif%}
-      </h3>
-      {% if booking.status == 'COLLECTED'%}
+      </h5>
+      <h5>Collection Amount:{{waste_amount.amount}}</h5>
+      {% if booking.status == 'Collected'%}
       <h3>Is your waste collected? If Yes,click below</h3>
       <form method="post" action="{% url 'smartbin_collect_verify' %}">
         {%csrf_token%}<button class="btn btn-primary mx-auto" type="submit">Verify</form>
