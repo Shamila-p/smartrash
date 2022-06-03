@@ -1,6 +1,7 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from accounts.models import CollectionAgent, User
+from smartbin.models import SmartBin
 from django.contrib import messages
 
 from wallet.models import Wallet
@@ -137,12 +138,12 @@ def add_customer(request):
         elif User.objects.filter(phone=phone).exists():
             messages.info(request, 'phone number already registered')
         else:
-            print(password1)
             user=User.objects.create_user(first_name=first_name, last_name=last_name, username=email,
                                      email=email, phone=phone, housename=house_name, place=place,
                                      postcode=postcode, state=state,
                                      country=country, municipality_id=request.user.id, password=password1, profile_image=profile_image,
                                      role=User.CUSTOMER, is_active=False)
+            SmartBin.objects.create(user_id=user.id)
             Wallet.objects.create(amount=0,user_id=user.id)
             return redirect('list_customer')
         return redirect('add_customer')

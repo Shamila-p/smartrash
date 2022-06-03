@@ -9,10 +9,10 @@ class User(AbstractUser):
     ADMIN = "AD"
 
     ROLES_CHOICES = [
-        (CUSTOMER, "CUSTOMER"),
-        (COLLECTION_AGENT, "COLLECTION AGENT"),
-        (MUNICIPALITY, "MUNICIPALITY"),
-        (ADMIN, "ADMIN"),
+        (CUSTOMER, "Customer"),
+        (COLLECTION_AGENT, "Collection Agent"),
+        (MUNICIPALITY, "Municipality"),
+        (ADMIN, "Admin"),
     ]
 
     phone = models.CharField(max_length=15)

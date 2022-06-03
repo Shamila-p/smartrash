@@ -1,0 +1,72 @@
+{% extends 'base.html'%}
+{% block content %}
+<div class="row">
+    <div class="col-12 grid-margin">
+        <div class="card">
+            <div class="card-body">
+                <div class="table-responsive">
+                    <table class="table table-striped" id="list_booking">
+                        <thead>
+                            <tr>
+                                <th> User Name </th>
+                                <th> Address</th>
+                                <th> Status </th>
+                                <th> Created Date </th>
+                                {%if request.user.role == 'MU'%}
+                                <th> Collection Agent</th>
+                                {%endif%}
+                                <th> Collection Date</th>
+                                {%if request.user.role == 'MU'%}
+                                <th></th>
+                                {%endif%}
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {%for booking in bookings%}
+                            <tr>
+                                <td>{{booking.smartbin.user.first_name}}</td>
+                                <td>{{booking.smartbin.user.housename}} <br>
+                                    {{booking.smartbin.user.place}} <br>
+                                    {{booking.smartbin.user.postcode}} <br>
+                                    {{booking.smartbin.user.state}} <br>
+                                </td>
+                                <td> {{booking.status}}</td>
+                                <td> {{booking.created_date}} </td>
+                                {%if request.user.role == 'MU'%}
+                                <td>
+                                    {% if booking.collection_agent == None %}
+                                    <span class="text-danger">Unassigned</span>
+                                    {%else%}
+                                    {{booking.collection_agent.first_name}}
+                                    {%endif%}
+                                </td>
+                                {%endif%}
+                                <td>
+                                    {% if booking.collection_date == None %}
+                                    <span class="text-danger">Unassigned</span>
+                                    {%else%}
+                                    {{booking.collection_date}}
+                                    {%endif%}
+                                </td>
+                                {%if request.user.role == 'MU'%}
+                                <td><a href="{% url 'detailed_view' booking.id %}" class="btn btn-primary ">Detailed
+                                        View</a></td>
+                                {%endif%}
+                            <tr>
+                                {%endfor%}
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{%endblock%}
+
+{%block script%}
+<script>
+    $(function () {
+        $("#list_booking").dataTable();
+    })
+</script>
+{%endblock%}

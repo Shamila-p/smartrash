@@ -44,6 +44,8 @@ INSTALLED_APPS = [
     'access.apps.AccessConfig',
     'wallet.apps.WalletConfig',
     'query.apps.QueryConfig',
+    'smartbin.apps.SmartbinConfig',
+    'booking.apps.BookingConfig',
 ]
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -69,6 +71,8 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'accounts/templates'),
             os.path.join(BASE_DIR, 'wallet/templates'),
             os.path.join(BASE_DIR, 'query/templates'),
+            os.path.join(BASE_DIR, 'smartbin/templates'),
+            os.path.join(BASE_DIR, 'booking/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

@@ -1,0 +1,40 @@
+{% extends 'base.html'%}
+{% block content %}
+{% if smartbin.bin_id == None %}
+<h4>Smart Bin not linked yet!! </h4>
+<a href="{%url 'link_bin' %}" class="btn btn-primary">LINK NOW</a>
+{%else%}
+<div class="card bg-light mb-3 w-50 mx-auto" >
+    <div class="card-body">
+      <img class="card-img-top" src='access/resources/img/bin.png' alt="Card image cap">
+      <h5 class="card-title">Bin ID:{{smartbin.bin_id}}</h5>
+      <h5 class="card-title">Bin Status:</h5><br>
+      {%if smartbin.fill_status == True %}
+      <h3 class="text-danger display-3">Your Bin is full</h3>
+      <h5 class="card-title mt-3">Booking Status:{{booking.status}}</h5><br>
+      <h3 class="card-title mt-3 display-2">Collection Date:
+        {%if booking.collection_date == None %}
+        not updated
+        {%else%} 
+        {{booking.collection_date}}
+        {%endif%}
+      </h3>
+      {% if booking.status == 'COLLECTED'%}
+      <h3>Is your waste collected? If Yes,click below</h3>
+      <form method="post" action="{% url 'smartbin_collect_verify' %}">
+        {%csrf_token%}<button class="btn btn-primary mx-auto" type="submit">Verify</form>
+      {%endif%}
+      {%else%}
+      <h3 class="text-success display-3">Your Bin is not full</h3>
+      {%endif%}
+      
+    </div>
+  {%endif%}
+</div>
+
+  {% endblock %}
+
+  
+
+
+   
