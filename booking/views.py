@@ -34,6 +34,10 @@ def booking_create(request):
 def manual_booking(request):
     if not (request.user.role == User.CUSTOMER):
         return HttpResponse('Unauthorized', status=401)
+    if request.method == 'GET':
+        smartbin = SmartBin.objects.get(user_id=request.user.id)
+        context={'title':'Manual Booking','smartbin':smartbin}
+        return render(request,'manual_booking.html',context)
     if request.method == 'POST':
         smartbin = SmartBin.objects.get(user_id=request.user.id)
         Booking.objects.create(smartbin_id=smartbin.id,

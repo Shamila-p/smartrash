@@ -32,8 +32,6 @@
       {%endif%}
       {%else%}
       <h3 class="text-success display-3">Your Bin is not full</h3>
-      <form method="post" action="{% url 'manual_booking' %}">
-        {%csrf_token%}<button class="btn btn-primary mx-auto" type="submit">Book your self</form>
       {%endif%}
       
     </div>
