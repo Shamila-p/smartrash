@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
+from access.views import recycler
 from accounts.models import CollectionAgent, User
 from home.models import WasteAmount
 from smartbin.models import SmartBin
@@ -12,11 +13,11 @@ from wallet.models import Wallet
 
 @login_required
 def profile(request):
-    if not (request.user.role == User.CUSTOMER or request.user.role == User.COLLECTION_AGENT or request.user.role == User.MUNICIPALITY):
+    if not (request.user.role == User.CUSTOMER or request.user.role == User.COLLECTION_AGENT or request.user.role == User.MUNICIPALITY or request.user.role == User.RECYCLER):
         return HttpResponse('Unauthorized', status=401)
     if request.method == 'GET':
         municipalities = User.objects.filter(role=User.MUNICIPALITY)
-        if request.user.role == User.CUSTOMER:
+        if request.user.role == User.CUSTOMER or request.user.role == User.RECYCLER:
             context = {'title': 'Profile',
                        'municipalities': municipalities}
         elif request.user.role == User.COLLECTION_AGENT:
@@ -108,8 +109,8 @@ def list_customer(request):
         users = User.objects.filter(
             role=User.CUSTOMER, municipality_id=request.user.id)
         context = {'title': 'Customers', 'add_button_name': 'ADD CUSTOMER',
-                   'add_button_url_name': 'add_customer', 'users': users}
-        return render(request, 'list_customer_agent.html', context)
+                   'add_button_url_name': 'add_customer', 'users': users, 'is_customer_page': True}
+        return render(request, 'list_customer_agent_recycler.html', context)
 
 
 @login_required
@@ -117,8 +118,8 @@ def add_customer(request):
     if not (request.user.role == User.MUNICIPALITY):
         return HttpResponse('Unauthorized', status=401)
     if request.method == 'GET':
-        context = {'title': 'Add Customer'}
-        return render(request, 'add_customer_agent.html', context)
+        context = {'title': 'Add Customer', 'is_customer_page': True}
+        return render(request, 'add_customer_agent_recycler.html', context)
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -184,7 +185,7 @@ def list_agent(request):
         agents = CollectionAgent.objects.filter(user_id__in=user_ids)
         context = {'title': 'Collection Agents', 'add_button_name': 'ADD COLLECTION AGENT',
                    'add_button_url_name': 'add_agent', 'users': users, 'agents': agents, 'is_agent_page': True}
-        return render(request, 'list_customer_agent.html', context)
+        return render(request, 'list_customer_agent_recycler.html', context)
 
 
 @login_required
@@ -193,7 +194,7 @@ def add_agent(request):
         return HttpResponse('Unauthorized', status=401)
     if request.method == 'GET':
         context = {'title': 'Add Agent', 'is_agent_page': True}
-        return render(request, 'add_customer_agent.html', context)
+        return render(request, 'add_customer_agent_recycler.html', context)
     if request.method == 'POST':
         first_name = request.POST['first_name']
         last_name = request.POST['last_name']
@@ -315,3 +316,70 @@ def change_status_municipalities(request, user_id):
         user.is_active = not user.is_active
         user.save()
         return redirect('list_municipalities')
+
+
+@login_required
+def list_recyclers(request):
+    if not (request.user.role == User.MUNICIPALITY):
+        return HttpResponse('Unauthorized', status=401)
+    if request.method == 'GET':
+        users = User.objects.filter(
+            role=User.RECYCLER, municipality_id=request.user.id)
+        context = {'title': 'Recyclers', 'add_button_name': 'ADD RECYCLER',
+                   'add_button_url_name': 'add_recycler', 'users': users, 'is_recycler_page': True}
+        return render(request, 'list_customer_agent_recycler.html', context)
+
+
+@login_required
+def add_recyclers(request):
+    if not (request.user.role == User.MUNICIPALITY):
+        return HttpResponse('Unauthorized', status=401)
+    if request.method == 'GET':
+        context = {'title': 'Add Recycler', 'is_recycler_page': True}
+        return render(request, 'add_customer_agent_recycler.html', context)
+    if request.method == 'POST':
+        name = request.POST['name']
+        phone = request.POST['phone']
+        email = request.POST['email']
+        building_name = request.POST['building_name']
+        place = request.POST['place']
+        postcode = request.POST['postcode']
+        state = request.POST['state']
+        country = request.POST['country']
+        password1 = request.POST['password1']
+        password2 = request.POST['password2']
+        if not password1 == password2:
+            messages.info(request, 'password incorrect')
+        elif User.objects.filter(email=email).exists():
+            messages.info(request, 'email taken')
+        elif User.objects.filter(phone=phone).exists():
+            messages.info(request, 'phone number already registered')
+        else:
+            user = User.objects.create_user(first_name=name, username=email,
+                                            email=email, phone=phone, housename=building_name, place=place,
+                                            postcode=postcode, state=state,
+                                            country=country, municipality_id=request.user.id, password=password1,
+                                            role=User.RECYCLER, is_active=False)
+            return redirect('list_recyclers')
+        return redirect('add_recycler')
+
+
+@login_required
+def remove_recycler(request, user_id):
+    if not (request.user.role == User.MUNICIPALITY):
+        return HttpResponse('Unauthorized', status=401)
+    if request.method == 'POST':
+        recycler = User.objects.get(id=user_id)
+        recycler.delete()
+        return redirect('list_recyclers')
+
+
+@login_required
+def change_status_recycler(request, user_id):
+    if not (request.user.role == User.MUNICIPALITY):
+        return HttpResponse('Unauthorized', status=401)
+    if request.method == 'POST':
+        user = User.objects.get(id=user_id)
+        user.is_active = not user.is_active
+        user.save()
+        return redirect('list_recyclers')

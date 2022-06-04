@@ -7,12 +7,14 @@ class User(AbstractUser):
     COLLECTION_AGENT = "CA"
     MUNICIPALITY = "MU"
     ADMIN = "AD"
+    RECYCLER="RE"
 
     ROLES_CHOICES = [
         (CUSTOMER, "Customer"),
         (COLLECTION_AGENT, "Collection Agent"),
         (MUNICIPALITY, "Municipality"),
         (ADMIN, "Admin"),
+        (RECYCLER, "Recycler"),
     ]
 
     phone = models.CharField(max_length=15)

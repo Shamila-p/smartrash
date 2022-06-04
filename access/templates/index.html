@@ -11,8 +11,6 @@
                             style="height: 200px;width:200px;margin: auto;padding:10px;">
                         <div class="card-body custom-card-body">
                             <h5 class="card-title text-center"><b>CUSTOMER</b></h5>
-
-                            <!-- <a href="#" class="btn btn-primary">Go somewhere</a> -->
                         </div>
                     </div>
                     <div class="card card-back">
@@ -53,6 +51,21 @@
                     <div class="card card-back">
                         <div class="card-body custom-card-body ">
                             <a href="{% url 'municipality_login' %}" class="btn btn-success ">Click Here</a>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="card-container mx-auto mt-5">
+                    <div class="card card-front">
+                        <img class="card-img-top" src="{% static 'images/recycle-bin.png'%}" alt="Card image cap"
+                            style="height: 200px;width:200px;margin: auto;padding:10px;">
+                        <div class="card-body custom-card-body">
+                            <h5 class="card-title text-center"><b>RECYCLER</b></h5>
+                        </div>
+                    </div>
+                    <div class="card card-back">
+                        <div class="card-body custom-card-body ">
+                            <a href="{% url 'recycler_login' %}" class="btn btn-success ">Click Here</a>
                         </div>
                     </div>
                 </div>

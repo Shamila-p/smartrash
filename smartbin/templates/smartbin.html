@@ -1,4 +1,5 @@
 {% extends 'base.html'%}
+{% load static %}
 {% block content %}
 {%for message in messages%}
     <div class="alert alert-danger">
@@ -11,7 +12,8 @@
 {%else%}
 <div class="card bg-light mb-3 w-50 mx-auto" >
     <div class="card-body">
-      <img class="card-img-top" src='access/resources/img/bin.png' alt="Card image cap">
+      
+      <img class="card-img-top " src="{% static 'images/bin.png' %}" alt="Card image cap" style="height: 300px; width:300px">
       <h5 class="card-title">Bin ID:{{smartbin.bin_id}}</h5>
       <h5 class="card-title">Bin Status:</h5><br>
       {%if smartbin.fill_status == True %}

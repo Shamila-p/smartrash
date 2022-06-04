@@ -20,8 +20,12 @@ urlpatterns = [
     path('list/municipalities', views.list_municipalities, name='list_municipalities'),
     path('add/municipality', views.add_municipalities, name='add_municipalities'),
     path('remove/municipality<int:user_id>', views.remove_municipalities, name='remove_municipalities'),
-    path('change-status/municipality/<int:user_id>',views.change_status_municipalities,name="change_status_municipalities")
+    path('change-status/municipality/<int:user_id>',views.change_status_municipalities,name="change_status_municipalities"),
 
+    path('list/recyclers', views.list_recyclers, name='list_recyclers'),
+    path('recyclers/add', views.add_recyclers, name='add_recycler'),
+    path('recyclers/remove/<int:user_id>', views.remove_recycler, name='remove_recycler'),
+    path('recyclers/change-status/<int:user_id>',views.change_status_recycler,name="change_status_recycler"),
 
 
 ]

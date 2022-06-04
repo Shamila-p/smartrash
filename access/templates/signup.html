@@ -11,6 +11,7 @@
                 <h1 class="mt-5 mb-4">{{title}} </h1>
                 <form method="post" enctype="multipart/form-data">
                         {%csrf_token%}
+                        {% if is_agent_page is True or is_customer_page is True%}
                         <div class="row mt-2">
                                 <div class="col-md-6 form-group"><label class="labels">First Name</label><input
                                                 type="text" class="form-control" placeholder="enter First name"
@@ -19,6 +20,12 @@
                                                 type="text" class="form-control" value="" placeholder=" enter Last name"
                                                 name="last_name" required></div>
                         </div>
+                        {%endif%}
+                        {% if is_recycler_page is True%}
+                        <div class="col-md-12 form-group"><label class="labels"> Name</label><input
+                                type="text" class="form-control" placeholder="Enter  name"
+                                name="name" required></div>
+                        {%endif%}
                         <div class="row ">
                                 <div class="col-md-6 mt-3">
                                         <label class="labels">Phone Number</label>
@@ -36,6 +43,7 @@
                                         <input type="text" class="form-control" placeholder="Enter aadhaar number"
                                                 name="aadhaar" required>
                                 </div>
+                               
                                 <div class="col-md-6 mt-3">
                                         <label class="labels">Upload Aadhar card</label>
                                         <input type="file" class="form-control" accept="image/*" name="aadhaar_pic"
@@ -52,11 +60,20 @@
                                                 required>
                                 </div>
                                 {%endif%}
+                                {% if is_recycler_page is True%}
+                                <div class="col-md-12 mt-3">
+                                        <label class="labels">Building Name</label>
+                                        <input class="form-control" placeholder="Enter house name " name="building_name"
+                                                required>
+                                </div>
+                                {%endif%}
+                                {% if is_agent_page is True or is_customer_page is True%}
                                 <div class="col-md-12 mt-3">
                                         <label class="labels">House Name</label>
                                         <input class="form-control" placeholder="Enter house name " name="house_name"
                                                 required>
                                 </div>
+                                {%endif%}
                                 <div class="col-md-4 mt-3">
                                         <label class="labels">Place</label>
                                         <input type="text" class="form-control" placeholder="Enter your area"
@@ -94,11 +111,13 @@
                                         <input type="password" class="form-control" placeholder="Re-enter your password"
                                                 name="password2">
                                 </div>
+                                {% if is_agent_page is True or is_customer_page is True%}
                                 <div class="col-md-6 mt-3">
                                         <label class="labels">Upload Profile image</label>
                                         <input type="file" class="form-control" accept="image/*" name="profile_image"
                                                 required>
                                 </div>
+                                {%endif%}
                         </div>
                         <div class="mt-5 text-center">
                                 <button class="btn btn-primary profile-button" type="submit">Sign Up</button>
