@@ -12,6 +12,11 @@ class Booking(models.Model):
     COLLECTED = "Collected"
     VERIFIED ="Verified"
 
+
+    MANUAL="Manual"
+    AUTOMATIC="Automatic"
+
+
     STATUS_CHOICES = [
         (PENDING, "Pending"),
         (ASSIGNED, "Assigned "),
@@ -19,8 +24,15 @@ class Booking(models.Model):
         (VERIFIED, "Verified"),
     ]
 
+
+    TYPE_CHOICES = [
+        (MANUAL,"Manual"),
+        (AUTOMATIC,"Automatic"),
+    ]
+
     smartbin=models.ForeignKey(SmartBin, on_delete=models.CASCADE,null=False)
     status = models.CharField(max_length=10, choices=STATUS_CHOICES, null=False)
+    type = models.CharField(max_length=10, choices=TYPE_CHOICES, null=False,default=AUTOMATIC)
     created_date=models.DateTimeField(default=now)
     collection_date=models.DateField(null=True)
     collection_agent=models.ForeignKey(User, on_delete=models.CASCADE,null=True)

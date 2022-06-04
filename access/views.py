@@ -29,7 +29,6 @@ def customer_login(request):
         email = request.POST['email']
         password = request.POST['password']
         user = auth.authenticate(username=email, password=password)
-        print(email,password,user)
         if user is not None and user.role == User.CUSTOMER:
             auth.login(request, user)
             return redirect('home')

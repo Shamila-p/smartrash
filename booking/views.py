@@ -16,7 +16,7 @@ def booking_create(request):
             smartbin = SmartBin.objects.get(bin_id=bin_id)
             if not Booking.objects.filter(smartbin_id=smartbin.id).exclude(status=Booking.VERIFIED).exists():
                 Booking.objects.create(
-                    smartbin_id=smartbin.id, status=Booking.PENDING)
+                    smartbin_id=smartbin.id, status=Booking.PENDING, type=Booking.AUTOMATIC)
                 smartbin.fill_status = True
                 smartbin.save()
             return JsonResponse(
@@ -28,6 +28,19 @@ def booking_create(request):
                 {'status': 'failed'},
                 safe=False
             )
+
+
+@login_required
+def manual_booking(request):
+    if not (request.user.role == User.CUSTOMER):
+        return HttpResponse('Unauthorized', status=401)
+    if request.method == 'POST':
+        smartbin = SmartBin.objects.get(user_id=request.user.id)
+        Booking.objects.create(smartbin_id=smartbin.id,
+                               status=Booking.PENDING, type=Booking.MANUAL)
+        smartbin.fill_status = True
+        smartbin.save()
+        return redirect('smartbin')
 
 
 @login_required
