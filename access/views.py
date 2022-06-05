@@ -3,6 +3,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.models import auth
 from access.models import ForgotPassword
 from accounts.models import User, CollectionAgent
+from home.models import RecyclerAmount
 from smartbin.models import SmartBin
 from wallet.models import Wallet
 from django.core.mail import send_mail
@@ -254,10 +255,12 @@ def recycler_signup(request):
         elif User.objects.filter(phone=phone).exists():
             messages.info(request, 'phone number already registered')
         else:
-            user = User.objects.create_user(first_name=name, username=email,
+            recycler = User.objects.create_user(first_name=name, username=email,
                                             email=email, phone=phone, housename=building_name, place=place,
                                             municipality_id=municipality_id, postcode=postcode, state=state,
                                             country=country, password=password1, role=User.RECYCLER)
+            Wallet.objects.create(amount=0, user_id=recycler.id)
+            RecyclerAmount.objects.create(recycler_id=recycler.id)
             return redirect('recycler_login')
         return redirect('recycler_signup')
 

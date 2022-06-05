@@ -21,6 +21,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('admin-django/', admin.site.urls),
+    path('', include('book_recycler.urls')),
     path('', include('booking.urls')),
     path('', include('smartbin.urls')),
     path('', include('query.urls')),

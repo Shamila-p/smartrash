@@ -2,7 +2,7 @@ from django.shortcuts import render, redirect, HttpResponse
 from django.contrib.auth.decorators import login_required
 from access.views import recycler
 from accounts.models import CollectionAgent, User
-from home.models import WasteAmount
+from home.models import RecyclerAmount, WasteAmount
 from smartbin.models import SmartBin
 from django.contrib import messages
 
@@ -355,11 +355,13 @@ def add_recyclers(request):
         elif User.objects.filter(phone=phone).exists():
             messages.info(request, 'phone number already registered')
         else:
-            user = User.objects.create_user(first_name=name, username=email,
+            recycler = User.objects.create_user(first_name=name, username=email,
                                             email=email, phone=phone, housename=building_name, place=place,
                                             postcode=postcode, state=state,
                                             country=country, municipality_id=request.user.id, password=password1,
                                             role=User.RECYCLER, is_active=False)
+            Wallet.objects.create(amount=0, user_id=recycler.id)
+            RecyclerAmount.objects.create(recycler_id=recycler.id)
             return redirect('list_recyclers')
         return redirect('add_recycler')
 

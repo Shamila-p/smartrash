@@ -61,3 +61,4 @@ class CollectionAgent(models.Model):
         except ValueError:
             url=""
         return url
+
