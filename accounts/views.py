@@ -326,8 +326,11 @@ def list_recyclers(request):
     if request.method == 'GET':
         users = User.objects.filter(
             role=User.RECYCLER, municipality_id=request.user.id)
-        context = {'title': 'Recyclers', 'add_button_name': 'ADD RECYCLER',
-                   'add_button_url_name': 'add_recycler', 'users': users, 'is_recycler_page': True}
+        if users.exists():
+            context = {'title': 'Recyclers','users': users, 'is_recycler_page': True}
+        else:
+            context = {'title': 'Recyclers', 'add_button_name': 'ADD RECYCLER',
+                    'add_button_url_name': 'add_recycler', 'users': users, 'is_recycler_page': True}
         return render(request, 'list_customer_agent_recycler.html', context)
 
 

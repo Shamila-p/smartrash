@@ -14,6 +14,18 @@ import uuid
 def index(request):
     return render(request, 'index.html')
 
+def contact_us(request):
+    if request.method == 'POST':
+        first_name=request.POST['first_name']
+        last_name=request.POST['last_name']
+        email=request.POST['email']
+        content=request.POST['message']
+        subject = 'Contact Us - Smartrash'
+        message = 'Name: '+first_name+' '+ last_name+'\nEmail: '+email+'\nMessage: '+content
+        email_from = settings.EMAIL_HOST_USER
+        recipient_list = [settings.EMAIL_HOST_USER]
+        send_mail(subject, message, email_from, recipient_list)
+        return redirect('index')
 
 def customer(request):
     if request.method == 'GET':
@@ -106,7 +118,7 @@ def recycler_login(request):
         if request.user.is_authenticated and request.user.role == User.RECYCLER:
             return redirect('home')
         context = {'title': 'Recycler Login',
-                   'signup_url_name': 'recycler_signup', 'show_forgot_password': True}
+                   'signup_url_name': None, 'show_forgot_password': True}
         return render(request, 'login.html', context)
     if request.method == "POST":
         email = request.POST['email']
