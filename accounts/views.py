@@ -226,6 +226,7 @@ def add_agent(request):
                                             role=User.COLLECTION_AGENT, is_active=False)
             CollectionAgent.objects.create(aadhaar_number=aadhaar_number, license_number=license_number,
                                            aadhaar_image=aadhaar_image, license_image=license_image, user_id=user.id)
+            Wallet.objects.create(amount=0, user_id=user.id)
             return redirect('list_agent')
         return redirect('add_agent')
 

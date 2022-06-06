@@ -35,11 +35,11 @@ def set_recycler_amount(request):
         return render(request, 'set_recycler_amount.html', context)
     if request.method == 'POST':
         paper_amount = request.POST['paper_amount']
-        iron_amount = request.POST['iron_amount']
+        metal_amount = request.POST['metal_amount']
         agent_amount = request.POST['agent_amount']
         recycler_amount = RecyclerAmount.objects.get(recycler_id=request.user.id)
         recycler_amount.paper_amount=paper_amount
-        recycler_amount.iron_amount=iron_amount
+        recycler_amount.metal_amount=metal_amount
         recycler_amount.agent_amount=agent_amount
         recycler_amount.save()
         return redirect('set_recycler_amount')

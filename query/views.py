@@ -7,7 +7,7 @@ from django.contrib.auth.decorators import login_required
 
 @login_required
 def ask_query(request):
-    if not (request.user.role == User.COLLECTION_AGENT or request.user.role == User.CUSTOMER):
+    if not (request.user.role == User.COLLECTION_AGENT or request.user.role == User.CUSTOMER or request.user.role == User.RECYCLER):
         return HttpResponse('Unauthorized', status=401)
     if request.method == 'GET':
         context = {'title': 'ENQUIRY'}

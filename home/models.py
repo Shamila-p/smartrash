@@ -11,6 +11,6 @@ class WasteAmount(models.Model):
 class RecyclerAmount(models.Model):
      recycler = models.ForeignKey(User, on_delete=models.CASCADE,null=False)
      paper_amount=models.FloatField(null=False,default=100)
-     iron_amount=models.FloatField(null=False,default=100)
+     metal_amount=models.FloatField(null=False,default=100)
      agent_amount=models.FloatField(null=False,default=100)
 

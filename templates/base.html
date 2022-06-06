@@ -48,7 +48,7 @@
                 <span class="availability-status online"></span>
               </div>
               <div class="nav-profile-text">
-                <p class="mb-1 text-black">{{request.user.role}}</p>
+                <p class="mb-1 text-black">{{request.user.first_name}} {{request.user.last_name}}</p>
               </div>
             </a>
             <div class="dropdown-menu navbar-dropdown" aria-labelledby="profileDropdown">
@@ -115,6 +115,12 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{%url 'recycler_booking' %}">
+              <span class="menu-title">Book Recycler</span>
+              <i class="mdi mdi-chart-bar menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{%url 'wallet' %}">
               <span class="menu-title">Wallet</span>
               <i class="mdi mdi-table-large menu-icon"></i>
@@ -122,7 +128,13 @@
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'booking_history' %}">
-              <span class="menu-title">History</span>
+              <span class="menu-title">Booking History</span>
+              <i class="mdi mdi-table-large menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'recycler_history' %}">
+              <span class="menu-title">Recycler History</span>
               <i class="mdi mdi-table-large menu-icon"></i>
             </a>
           </li>
@@ -146,14 +158,32 @@
             </a>
           </li>
           <li class="nav-item">
+            <a class="nav-link" href="{%url 'list_recycler_booking' %}">
+              <span class="menu-title">Recycler Task</span>
+              <i class="mdi mdi-chart-bar menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'wallet' %}">
+              <span class="menu-title">Wallet</span>
+              <i class="mdi mdi-table-large menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
             <a class="nav-link" href="{%url 'booking_history' %}">
-              <span class="menu-title">History</span>
+              <span class="menu-title">Booking History</span>
+              <i class="mdi mdi-chart-bar menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'recycler_history' %}">
+              <span class="menu-title">Recycler History</span>
               <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'ask_query' %}">
-              <span class="menu-title">Ask a Query</span>
+              <span class="menu-title">Enquiry</span>
               <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
           </li>
@@ -221,8 +251,20 @@
             </a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="">
+            <a class="nav-link" href="{%url 'list_recycler_booking' %}">
               <span class="menu-title">Tasks</span>
+              <i class="mdi mdi-chart-bar menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'recycler_history' %}">
+              <span class="menu-title">History</span>
+              <i class="mdi mdi-chart-bar menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'ask_query' %}">
+              <span class="menu-title">Enquiry</span>
               <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
           </li>

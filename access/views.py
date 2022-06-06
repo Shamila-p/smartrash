@@ -225,6 +225,7 @@ def agent_signup(request):
                                             postcode=postcode, state=state, country=country, password=password1, profile_image=profile_image, role=User.COLLECTION_AGENT, is_active=False)
             CollectionAgent.objects.create(aadhaar_number=aadhaar_number, license_number=license_number,
                                            aadhaar_image=aadhaar_image, license_image=license_image, user_id=user.id)
+            Wallet.objects.create(amount=0, user_id=user.id)
             return redirect('agent_login')
         return redirect('agent_signup')
 
