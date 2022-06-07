@@ -1,3 +1,4 @@
+import json
 from accounts.models import User
 from booking.models import Booking
 from smartbin.models import SmartBin
@@ -11,7 +12,9 @@ from django.contrib import messages
 @csrf_exempt
 def booking_create(request):
     if request.method == 'POST':
-        bin_id = request.POST['bin_id']
+        body_unicode = request.body.decode('utf-8')
+        body = json.loads(body_unicode)
+        bin_id = body.get('bin_id')
         if SmartBin.objects.filter(bin_id=bin_id).exists():
             smartbin = SmartBin.objects.get(bin_id=bin_id)
             if not Booking.objects.filter(smartbin_id=smartbin.id).exclude(status=Booking.VERIFIED).exists():
