@@ -18,6 +18,8 @@
                                 <th> Status </th>
                                 <th>Weight of Plastic waste</th>
                                 <th>Weight of Metal waste</th>
+                                <th>Total Amount for waste</th>
+                                <th>Total Amount for collection agent</th>
                                 <th> Created Date </th>
                                 {%if request.user.role == 'RE'%}
                                 <th> Collection Agent</th>
@@ -47,6 +49,8 @@
                                 <td> {{recycler_booking.status}}</td>
                                 <td> {{recycler_booking.paper_waste}}</td>
                                 <td> {{recycler_booking.metal_waste}}</td>
+                                <td> {{recycler_booking.total_price_for_waste}}</td>
+                                <td> {{recycler_amount.agent_amount}}</td>
                                 <td> {{recycler_booking.created_date}} </td>
                                 {%if request.user.role == 'RE'%}
                                 <td>

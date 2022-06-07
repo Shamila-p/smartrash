@@ -90,7 +90,8 @@ def collect(request):
     if not (request.user.role == User.COLLECTION_AGENT):
         return HttpResponse('Unauthorized', status=401)
     if request.method == 'GET':
-        context = {'title': 'Collect Garbage'}
+        bin_id=request.GET.get('bin_id')
+        context = {'title': 'Collect Garbage','bin_id':bin_id}
         return render(request, 'collect.html', context)
     if request.method == 'POST':
         bin_id = request.POST['bin_id']

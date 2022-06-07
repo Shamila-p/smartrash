@@ -3,7 +3,6 @@ from accounts.models import User
 from book_recycler.models import RecyclerBooking
 from django.contrib.auth.decorators import login_required
 from django.contrib import messages
-
 from home.models import RecyclerAmount
 from wallet.models import Wallet
 # Create your views here.
@@ -13,20 +12,21 @@ def recycler_booking(request):
     if request.method == 'GET':
         if User.objects.filter(municipality_id=request.user.municipality_id, role=User.RECYCLER).exists():
             is_recycler_available = True
+            recycler = User.objects.get(role=User.RECYCLER, municipality_id=request.user.municipality_id)
+            recycler_amount=RecyclerAmount.objects.get(recycler_id=recycler.id)
+            recycler_booking = RecyclerBooking.objects.filter(user_id=request.user.id).exclude(
+            status=RecyclerBooking.VERIFIED).first()
             if RecyclerBooking.objects.filter(user_id=request.user.id).exclude(status=RecyclerBooking.VERIFIED).exists():
                 allow_new_booking = False
             else:
                 allow_new_booking = True
+            context = {'title': 'Book Recycler', 'allow_new_booking': allow_new_booking,
+                   'recycler_booking': recycler_booking,'recycler_amount':recycler_amount,'is_recycler_available': is_recycler_available}
         else:
             is_recycler_available = False
-            allow_new_booking = False
-        recycler_booking = RecyclerBooking.objects.filter(user_id=request.user.id).exclude(
-            status=RecyclerBooking.VERIFIED).first()
-        recycler = User.objects.get(
-            role=User.RECYCLER, municipality_id=request.user.municipality_id)
-        recycler_amount=RecyclerAmount.objects.get(recycler_id=recycler.id)
-        context = {'title': 'Book Recycler', 'allow_new_booking': allow_new_booking,
-                   'recycler_booking': recycler_booking,'recycler_amount':recycler_amount,'is_recycler_available': is_recycler_available}
+            context = {'title': 'Book Recycler','is_recycler_available': is_recycler_available}
+       
+       
         return render(request, 'recycler_booking.html', context)
     if request.method == 'POST':
         paper_waste = request.POST['paper_waste']
@@ -45,8 +45,12 @@ def list_recycler_booking(request):
         if request.user.role == User.RECYCLER:
             recycler_bookings = RecyclerBooking.objects.filter(
                 recycler_id=request.user.id).exclude(status=RecyclerBooking.VERIFIED)
+            recycler_amount=RecyclerAmount.objects.get(recycler_id=request.user.id)
+            for recycler_booking in recycler_bookings:
+                recycler_booking.total_price_for_waste = recycler_booking.paper_waste*recycler_amount.paper_amount + recycler_amount.metal_amount*recycler_booking.metal_waste
             context = {'title': 'List Tasks',
-                       'recycler_bookings': recycler_bookings}
+                       'recycler_bookings': recycler_bookings,'recycler_amount':recycler_amount}
+
         if request.user.role == User.COLLECTION_AGENT:
             recycler_bookings = RecyclerBooking.objects.filter(
                 collection_agent_id=request.user.id).exclude(status=RecyclerBooking.VERIFIED)
