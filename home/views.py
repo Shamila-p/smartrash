@@ -7,7 +7,18 @@ from home.models import RecyclerAmount, WasteAmount
 @login_required
 def home(request):
     if request.method == 'GET':
-        return render(request, 'home.html')
+        # return render(request, 'home.html')
+        if request.user.role == User.CUSTOMER:
+            return redirect('smartbin')
+        elif request.user.role == User.COLLECTION_AGENT:
+            return redirect('list_booking')
+        elif request.user.role == User.MUNICIPALITY:
+            return redirect('list_booking')
+        elif request.user.role == User.RECYCLER:
+            return redirect('list_recycler_booking')
+        elif request.user.role == User.ADMIN:
+            return redirect('list_municipalities')
+
 
 
 @login_required

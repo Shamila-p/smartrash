@@ -20,6 +20,7 @@
   <!-- End layout styles -->
   <link rel="shortcut icon" href="{% static 'resources/images/favicon.ico'%}" />
   <link rel="stylesheet" type="text/css" href="http://cdn.datatables.net/1.12.1/css/jquery.dataTables.min.css">
+  
 </head>
 </head>
 
@@ -86,18 +87,18 @@
             </a>
           </li>
 
-          <li class="nav-item">
+          <!-- <li class="nav-item">
             <a class="nav-link" href="{%url 'home'  %}">
               <span class="menu-title">Home</span>
               <i class="mdi mdi-contacts menu-icon"></i>
             </a>
-          </li>
+          </li> -->
           {%if not request.user.role == 'AD' %}
 
           <li class="nav-item">
             <a class="nav-link" href="{%url 'profile' %}">
               <span class="menu-title">Profile</span>
-              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+              <i class="mdi mdi-account menu-icon"></i>
             </a>
           </li>
           {%endif%}
@@ -105,148 +106,148 @@
           <li class="nav-item">
             <a class="nav-link" href="{%url 'smartbin' %}">
               <span class="menu-title">Smart Bin</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-recycle menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'manual_booking' %}">
               <span class="menu-title">Manual Booking</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-credit-card-scan menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'recycler_booking' %}">
               <span class="menu-title">Book Recycler</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-lead-pencil menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'wallet' %}">
               <span class="menu-title">Wallet</span>
-              <i class="mdi mdi-table-large menu-icon"></i>
+              <i class="mdi mdi-key menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'booking_history' %}">
               <span class="menu-title">Booking History</span>
-              <i class="mdi mdi-table-large menu-icon"></i>
+              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'recycler_history' %}">
               <span class="menu-title">Recycler History</span>
-              <i class="mdi mdi-table-large menu-icon"></i>
+              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'ask_query' %}">
               <span class="menu-title">Enquiry</span>
-              <i class="mdi mdi-table-large menu-icon"></i>
+              <i class="mdi mdi-message-text menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'help' %}">
               <span class="menu-title">Help</span>
-              <i class="mdi mdi-table-large menu-icon"></i>
+              <i class="mdi mdi-help-circle menu-icon"></i>
             </a>
           </li>
           {%elif request.user.role == 'CA' %}
           <li class="nav-item">
             <a class="nav-link" href="{%url 'collect' %}">
               <span class="menu-title">Collect A Waste</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-truck menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'list_booking' %}">
               <span class="menu-title">Tasks</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-lead-pencil menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'list_recycler_booking' %}">
               <span class="menu-title">Recycler Task</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-lead-pencil menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'wallet' %}">
               <span class="menu-title">Wallet</span>
-              <i class="mdi mdi-table-large menu-icon"></i>
+              <i class="mdi mdi-key menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'booking_history' %}">
               <span class="menu-title">Booking History</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'recycler_history' %}">
               <span class="menu-title">Recycler History</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'ask_query' %}">
               <span class="menu-title">Enquiry</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-message-text menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'help' %}">
               <span class="menu-title">Help</span>
-              <i class="mdi mdi-table-large menu-icon"></i>
+              <i class="mdi mdi-help-circle menu-icon"></i>
             </a>
           </li>
           {%elif request.user.role == 'MU' %}
           <li class="nav-item">
             <a class="nav-link" href="{%url 'list_booking' %}">
               <span class="menu-title">Tasks</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-lead-pencil menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'list_customer' %}">
               <span class="menu-title">Customers</span>
-              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
+              <i class="mdi mdi-account-plus menu-icon"></i>
             </a>
           </li>
           
           <li class="nav-item">
             <a class="nav-link" href="{% url 'list_agent' %}">
               <span class="menu-title">Collection Agents</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-truck-delivery menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{% url 'list_recyclers' %}">
               <span class="menu-title">Recyclers</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-recycle menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'booking_history' %}">
               <span class="menu-title">History</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'set_waste_amount' %}">
               <span class="menu-title">Set Amount</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-square-inc-cash menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'wallet' %}">
               <span class="menu-title">Wallet</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-key menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'display_query' %}">
               <span class="menu-title">Queries</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-message-text menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
@@ -259,44 +260,44 @@
           <li class="nav-item">
             <a class="nav-link" href="{%url 'wallet' %}">
               <span class="menu-title">Wallet</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-key menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'set_recycler_amount' %}">
               <span class="menu-title">Set Amount</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-square-inc-cash menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'list_recycler_booking' %}">
               <span class="menu-title">Tasks</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-lead-pencil menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'recycler_history' %}">
               <span class="menu-title">History</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-format-list-bulleted menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'ask_query' %}">
               <span class="menu-title">Enquiry</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-message-text menu-icon"></i>
             </a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="{%url 'help' %}">
               <span class="menu-title">Help</span>
-              <i class="mdi mdi-table-large menu-icon"></i>
+              <i class="mdi mdi-help-circle menu-icon"></i>
             </a>
           </li>
           {%elif request.user.role == 'AD' %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'list_municipalities' %}">
               <span class="menu-title">Municipalities</span>
-              <i class="mdi mdi-chart-bar menu-icon"></i>
+              <i class="mdi mdi-home-variant menu-icon"></i>
             </a>
           </li>
           
@@ -342,13 +343,15 @@
     </div>
     <!-- page-body-wrapper ends -->
   </div>
+  
   <!-- container-scroller -->
   <!-- plugins:js -->
   <script src="{% static 'resources/vendors/js/vendor.bundle.base.js'%}"></script>
   <!-- endinject -->
   <!-- Plugin js for this page -->
   <script src="{% static 'resources/vendors/chart.js/Chart.min.js'%}"></script>
-  <script src="{% static 'resources/js/jquery.cookie.js'%}" type="text/javascript"></script>
+ <script src="{% static 'resources/js/jquery.cookie.js'%}" type="text/javascript"></script>
+ 
   <script type="text/javascript" charset="utf8" src="http://cdn.datatables.net/1.12.1/js/jquery.dataTables.min.js"></script>
   <!-- End plugin js for this page -->
   <!-- inject:js -->
