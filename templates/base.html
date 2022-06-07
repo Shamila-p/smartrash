@@ -144,6 +144,12 @@
               <i class="mdi mdi-table-large menu-icon"></i>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'help' %}">
+              <span class="menu-title">Help</span>
+              <i class="mdi mdi-table-large menu-icon"></i>
+            </a>
+          </li>
           {%elif request.user.role == 'CA' %}
           <li class="nav-item">
             <a class="nav-link" href="{%url 'collect' %}">
@@ -185,6 +191,12 @@
             <a class="nav-link" href="{%url 'ask_query' %}">
               <span class="menu-title">Enquiry</span>
               <i class="mdi mdi-chart-bar menu-icon"></i>
+            </a>
+          </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'help' %}">
+              <span class="menu-title">Help</span>
+              <i class="mdi mdi-table-large menu-icon"></i>
             </a>
           </li>
           {%elif request.user.role == 'MU' %}
@@ -237,6 +249,12 @@
               <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'help' %}">
+              <span class="menu-title">Help</span>
+              <i class="mdi mdi-table-large menu-icon"></i>
+            </a>
+          </li>
           {%elif request.user.role == 'RE' %}
           <li class="nav-item">
             <a class="nav-link" href="{%url 'wallet' %}">
@@ -268,6 +286,12 @@
               <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
           </li>
+          <li class="nav-item">
+            <a class="nav-link" href="{%url 'help' %}">
+              <span class="menu-title">Help</span>
+              <i class="mdi mdi-table-large menu-icon"></i>
+            </a>
+          </li>
           {%elif request.user.role == 'AD' %}
           <li class="nav-item">
             <a class="nav-link" href="{% url 'list_municipalities' %}">
@@ -275,6 +299,7 @@
               <i class="mdi mdi-chart-bar menu-icon"></i>
             </a>
           </li>
+          
           {%endif%}
         </ul>
       </nav>

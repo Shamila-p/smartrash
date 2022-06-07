@@ -15,7 +15,7 @@
         <h4 class="card-title">Collection Agent: {% if booking.collection_agent == None %}
             <span class="text-danger">Unassigned</span>
             {%else%}
-            {{booking.collection_agent.user.name}}
+            {{booking.collection_agent.first_name}} {{booking.collection_agent.last_name}}
             {%endif%}
         </h4>
         <h4 class="card-title">Collected Date:

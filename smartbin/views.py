@@ -38,6 +38,18 @@ def link_bin(request):
         smartbin.save()
         return redirect('smartbin')
 
+@login_required
+def unlink_bin(request):
+    if not (request.user.role == User.CUSTOMER):
+        return HttpResponse('Unauthorized', status=401)
+    if request.method == 'POST':
+        smartbin = SmartBin.objects.get(user_id=request.user.id,fill_status=True)
+        smartbin.bin_id = None
+        smartbin.fill_status=False
+        smartbin.save()
+        return redirect('smartbin')
+
+
 
 @login_required
 def smartbin_collect_verify(request):

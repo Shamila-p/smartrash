@@ -94,6 +94,7 @@ def collect(request):
         return render(request, 'collect.html', context)
     if request.method == 'POST':
         bin_id = request.POST['bin_id']
+        print(bin_id)
         if Booking.objects.filter(smartbin__bin_id=bin_id, collection_agent_id=request.user.id).exclude(status=Booking.VERIFIED).exists():
             booking = Booking.objects.filter(smartbin__bin_id=bin_id, collection_agent_id=request.user.id).exclude(
                 status=Booking.VERIFIED).first()

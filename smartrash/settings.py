@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'smartbin.apps.SmartbinConfig',
     'booking.apps.BookingConfig',
     'book_recycler.apps.BookRecyclerConfig',
+    'help.apps.HelpConfig',
 ]
 AUTH_USER_MODEL = 'accounts.User'
 
@@ -75,6 +76,7 @@ TEMPLATES = [
             os.path.join(BASE_DIR, 'smartbin/templates'),
             os.path.join(BASE_DIR, 'booking/templates'),
             os.path.join(BASE_DIR, 'book_recycler/templates'),
+            os.path.join(BASE_DIR, 'help/templates'),
         ],
         'APP_DIRS': True,
         'OPTIONS': {

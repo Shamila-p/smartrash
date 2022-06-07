@@ -18,7 +18,8 @@
             <div class="col-md-9 mt-3">
                 <input type="text" name="bin_id" placeholder="Enter bin ID" class="form form-control ">
             </div>
-          <a href="#" class="btn btn-primary mx-auto mt-4">COLLECTED</a>
+            <form method="post" action="{% url 'collect' %}">
+              {%csrf_token%}<button class="btn btn-primary mx-auto mt-3" type="submit">COLLECTED</form>
         </div>
       </div>
 

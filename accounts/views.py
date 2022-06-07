@@ -5,7 +5,6 @@ from accounts.models import CollectionAgent, User
 from home.models import RecyclerAmount, WasteAmount
 from smartbin.models import SmartBin
 from django.contrib import messages
-
 from wallet.models import Wallet
 
 
