@@ -43,7 +43,7 @@ def unlink_bin(request):
     if not (request.user.role == User.CUSTOMER):
         return HttpResponse('Unauthorized', status=401)
     if request.method == 'POST':
-        smartbin = SmartBin.objects.get(user_id=request.user.id,fill_status=True)
+        smartbin = SmartBin.objects.get(user_id=request.user.id)
         smartbin.bin_id = None
         smartbin.fill_status=False
         smartbin.save()
