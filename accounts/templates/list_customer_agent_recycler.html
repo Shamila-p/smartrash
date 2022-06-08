@@ -45,8 +45,8 @@
                         <tbody>
                             {%for user in users%}
                             <tr>
-                                {% if is_agent_page == True or is_customer_page == True %}
-                                <td> {{user.first_name}} </td>
+                                <td> {{user.first_name}}</td>
+                                {% if is_agent_page == True or is_customer_page == True  %}
                                 <td> {{user.last_name}} </td>
                                 {%endif%}
                                 <td> {{user.phone}}</td>
@@ -58,9 +58,6 @@
                                      <span class="badge badge-danger">Disapproved</span>
                                     {%endif%}
                                 </td>
-                                {% if is_recycler_page == True %}
-                                <td> {{user.housename}} </td>
-                                {%endif%}
                                 <td> {{user.housename}}</td>
                                 <td> {{user.place}}</td>
                                 <td> {{user.postcode}}</td>
